@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 4,
+   // fontFamily: 'Worksans',
   },
   subtitle: {
     color: '#475569',
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   submitButton: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#162D3A',
     borderRadius: 8,
     paddingVertical: 14,
     marginTop: 12,
@@ -232,6 +233,7 @@ const styles = StyleSheet.create({
   socialButtonText: {
     color: '#475569',
     fontSize: 14,
+    fontWeight: '600',
   },
   bottomText: {
     textAlign: 'center',
