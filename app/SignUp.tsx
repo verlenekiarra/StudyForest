@@ -1,9 +1,11 @@
 import * as AuthSession from 'expo-auth-session';
 import * as Google from 'expo-auth-session/providers/google';
+import { useRouter } from 'expo-router';
 import React from "react";
 import { Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
   const redirectUri = AuthSession.makeRedirectUri({});
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: '445956961338-h3kio0aqgnc5cadbjiap44fn2384uo6v.apps.googleusercontent.com',
@@ -19,11 +21,17 @@ const SignUp: React.FC = () => {
         .then(res => res.json())
         .then(user => {
           Alert.alert('Google Sign Up Success', `Welcome, ${user.name || user.email}!`);
+          router.replace('/homescreen');
         });
     } else if (response?.type === 'error') {
       Alert.alert('Google Auth Error', response.error?.message || 'Unknown error');
     }
   }, [response]);
+
+  const handleManualSignup = () => {
+    Alert.alert('Sign Up Success', 'You have signed up successfully!');
+    router.replace('/homescreen');
+  };
 
   return (
     <View style={styles.container}>
@@ -65,7 +73,7 @@ const SignUp: React.FC = () => {
               <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.submitButton}>
+          <TouchableOpacity style={styles.submitButton} onPress={handleManualSignup}>
             <Text style={styles.submitButtonText}>Sign up</Text>
           </TouchableOpacity>
         </View>
@@ -132,6 +140,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 4,
+   // fontFamily: 'Worksans',
   },
   subtitle: {
     color: '#475569',
@@ -170,7 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   submitButton: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#162D3A',
     borderRadius: 8,
     paddingVertical: 14,
     marginTop: 12,
@@ -232,6 +241,7 @@ const styles = StyleSheet.create({
   socialButtonText: {
     color: '#475569',
     fontSize: 14,
+    fontWeight: '600',
   },
   bottomText: {
     textAlign: 'center',
